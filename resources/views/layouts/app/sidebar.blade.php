@@ -12,11 +12,27 @@
 
             <flux:sidebar.nav>
                 <flux:sidebar.group :heading="__('Platform')" class="grid">
-                    <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                    <flux:sidebar.item
+                        icon="home"
+                        :href="route('dashboard')"
+                        :current="request()->routeIs('dashboard')"
+                        wire:navigate
+                    >
                         {{ __('Dashboard') }}
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item
+                        icon="plus"
+                        :href="route('requests.create')"
+                        :current="request()->routeIs('requests.*')"
+                        wire:navigate
+                    >
+                        {{ __('New request') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
+
+
 
             <flux:spacer />
 
