@@ -22,6 +22,14 @@
                     </flux:sidebar.item>
 
                     <flux:sidebar.item
+                        :href="route('requests.index')"
+                        :current="request()->routeIs('requests.*')"
+                        wire:navigate
+                    >
+                        {{ __('Request') }}
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item
                         icon="plus"
                         :href="route('requests.create')"
                         :current="request()->routeIs('requests.*')"
