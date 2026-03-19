@@ -91,7 +91,13 @@
                         <td class="px-6 py-4">
                             <div class="max-w-xl">
                                 <p class="font-medium text-zinc-900 dark:text-white">
-                                    {{ $request->title }}
+                                    <a
+                                        href="{{ route('requests.index') }}"
+                                        wire:navigate
+                                        class="font-medium text-zinc-900 transition hover:text-indigo-600 dark:text-white dark:hover:text-indigo-400"
+                                    >
+                                        {{ $request->title }}
+                                    </a>
                                 </p>
 
                                 @if ($request->description)
@@ -110,6 +116,26 @@
                                     default => 'bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300',
                                 };
                             @endphp
+
+                            @if ($request->isApproved() && $request->approver)
+                                <p class="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
+                                    Approved by {{ $request->approver->name }}
+                                </p>
+                            @elseif ($request->isRejected() && $request->rejector)
+                                <p class="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
+                                    Rejected by {{ $request->rejector->name }}
+                                </p>
+                            @endif
+
+                            @if ($request->isApproved() && $request->approved_at)
+                                <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+                                    {{ $request->approved_at->format('d M Y, H:i') }}
+                                </p>
+                            @elseif ($request->isRejected() && $request->rejected_at)
+                                <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+                                    {{ $request->rejected_at->format('d M Y, H:i') }}
+                                </p>
+                            @endif
 
                             <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold {{ $badgeClasses }}">
                                     {{ str($request->status)->headline() }}

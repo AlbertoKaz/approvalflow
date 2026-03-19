@@ -63,7 +63,7 @@ class Index extends Component
                 fn ($query) => $query->where('title', 'like', '%' . $this->search . '%')
             )
             ->latest()
-            ->paginate(10);
+            ->paginate(5);
 
         return view('livewire.approval-requests.index', [
             'requests' => $requests,
