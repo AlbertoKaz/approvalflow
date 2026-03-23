@@ -20,7 +20,7 @@ class Dashboard extends Component
             'latestRequests' => ApprovalRequest::query()
                 ->with('creator')
                 ->latest()
-                ->take(8)
+                ->take(5)
                 ->get(),
         ]);
     }
